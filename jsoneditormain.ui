@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>JsonEditorMain</class>
+ <widget class="QMainWindow" name="JsonEditorMain">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>726</width>
+    <height>544</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>JsonEditorMain</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QTextEdit" name="jsonCode">
+      <property name="locale">
+       <locale language="Chinese" country="China"/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTreeView" name="jsonTree">
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="autoExpandDelay">
+       <number>1</number>
+      </property>
+      <property name="animated">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>726</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="menuNewFile"/>
+    <addaction name="menuOpenFile"/>
+    <addaction name="menuSaveFile"/>
+    <addaction name="menuSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="menuRecent"/>
+    <addaction name="separator"/>
+    <addaction name="menuExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>编辑</string>
+    </property>
+    <addaction name="menuUndo"/>
+    <addaction name="menuRedo"/>
+    <addaction name="separator"/>
+    <addaction name="menuCut"/>
+    <addaction name="menuCopy"/>
+    <addaction name="menuPaste"/>
+    <addaction name="menuSelectAll"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>查看</string>
+    </property>
+    <widget class="QMenu" name="menu_5">
+     <property name="title">
+      <string>工具栏</string>
+     </property>
+     <addaction name="menuFileTools"/>
+     <addaction name="menuEditTools"/>
+     <addaction name="menuFindTools"/>
+     <addaction name="menuCodeTools"/>
+    </widget>
+    <addaction name="menu_5"/>
+    <addaction name="menuStatubar"/>
+    <addaction name="separator"/>
+    <addaction name="menuFind"/>
+    <addaction name="menuReplace"/>
+    <addaction name="separator"/>
+    <addaction name="menuExpand"/>
+    <addaction name="menuCollapse"/>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="menuAbout"/>
+    <addaction name="menuHelp"/>
+   </widget>
+   <widget class="QMenu" name="menu_6">
+    <property name="title">
+     <string>代码</string>
+    </property>
+    <addaction name="menuRefresh"/>
+    <addaction name="menuFormat"/>
+    <addaction name="separator"/>
+    <addaction name="menuInsertNode"/>
+    <addaction name="menuDeleteNode"/>
+    <addaction name="menuInsertChild"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_6"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_4"/>
+  </widget>
+  <widget class="QToolBar" name="fileToolBar">
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="menuNewFile"/>
+   <addaction name="menuOpenFile"/>
+   <addaction name="menuSaveFile"/>
+   <addaction name="menuExit"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="editToolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="menuCut"/>
+   <addaction name="menuCopy"/>
+   <addaction name="menuPaste"/>
+   <addaction name="menuUndo"/>
+   <addaction name="menuRedo"/>
+  </widget>
+  <widget class="QToolBar" name="findToolBar">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="menuFind"/>
+   <addaction name="menuReplace"/>
+  </widget>
+  <widget class="QToolBar" name="codeToolBar">
+   <property name="windowTitle">
+    <string>toolBar_3</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="menuFormat"/>
+   <addaction name="menuRefresh"/>
+   <addaction name="separator"/>
+   <addaction name="menuInsertNode"/>
+   <addaction name="menuDeleteNode"/>
+   <addaction name="menuInsertChild"/>
+  </widget>
+  <action name="menuNewFile">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/document-new.png</normaloff>:/ToolbarIcon/images/document-new.png</iconset>
+   </property>
+   <property name="text">
+    <string>新建</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="menuOpenFile">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/document-open.png</normaloff>:/ToolbarIcon/images/document-open.png</iconset>
+   </property>
+   <property name="text">
+    <string>打开</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="menuSaveFile">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/media-floppy.png</normaloff>:/ToolbarIcon/images/media-floppy.png</iconset>
+   </property>
+   <property name="text">
+    <string>保存</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="menuSaveAs">
+   <property name="text">
+    <string>另存为…</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="menuRecent">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>最近文件</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
+  </action>
+  <action name="menuExit">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/system-log-out.png</normaloff>:/ToolbarIcon/images/system-log-out.png</iconset>
+   </property>
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="menuUndo">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/edit-undo.png</normaloff>:/ToolbarIcon/images/edit-undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>撤销</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="menuCut">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/edit-cut.png</normaloff>:/ToolbarIcon/images/edit-cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>剪切</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="menuCopy">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/edit-copy.png</normaloff>:/ToolbarIcon/images/edit-copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>复制</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="menuPaste">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/edit-paste.png</normaloff>:/ToolbarIcon/images/edit-paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>粘贴</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="menuFormat">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/format-justify-right.png</normaloff>:/ToolbarIcon/images/format-justify-right.png</iconset>
+   </property>
+   <property name="text">
+    <string>生成代码</string>
+   </property>
+   <property name="toolTip">
+    <string>生成代码</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+F</string>
+   </property>
+  </action>
+  <action name="menuRefresh">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/view-refresh.png</normaloff>:/ToolbarIcon/images/view-refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>刷新代码树</string>
+   </property>
+   <property name="toolTip">
+    <string>刷新代码树</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+R</string>
+   </property>
+  </action>
+  <action name="menuStatubar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>状态栏</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+S</string>
+   </property>
+  </action>
+  <action name="menuAbout">
+   <property name="text">
+    <string>关于</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+A</string>
+   </property>
+  </action>
+  <action name="menuHelp">
+   <property name="text">
+    <string>帮助</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="menuRedo">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/edit-redo.png</normaloff>:/ToolbarIcon/images/edit-redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>重做</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="menuSelectAll">
+   <property name="text">
+    <string>全选</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="menuFind">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/edit-find.png</normaloff>:/ToolbarIcon/images/edit-find.png</iconset>
+   </property>
+   <property name="text">
+    <string>查找</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="menuReplace">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/edit-find-replace.png</normaloff>:/ToolbarIcon/images/edit-find-replace.png</iconset>
+   </property>
+   <property name="text">
+    <string>替换</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="menuFileTools">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>文件</string>
+   </property>
+  </action>
+  <action name="menuEditTools">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>编辑</string>
+   </property>
+  </action>
+  <action name="menuFindTools">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>查看</string>
+   </property>
+  </action>
+  <action name="menuCodeTools">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>代码</string>
+   </property>
+  </action>
+  <action name="menuInsertNode">
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/list-add.png</normaloff>:/ToolbarIcon/images/list-add.png</iconset>
+   </property>
+   <property name="text">
+    <string>插入节点</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="menuDeleteNode">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/list-remove.png</normaloff>:/ToolbarIcon/images/list-remove.png</iconset>
+   </property>
+   <property name="text">
+    <string>删除节点</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="menuInsertChild">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="jsoneditor.qrc">
+     <normaloff>:/ToolbarIcon/images/list-addchild.png</normaloff>:/ToolbarIcon/images/list-addchild.png</iconset>
+   </property>
+   <property name="text">
+    <string>插入子项</string>
+   </property>
+   <property name="toolTip">
+    <string>插入子项</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+I</string>
+   </property>
+  </action>
+  <action name="menuExpand">
+   <property name="text">
+    <string>展开所有节点</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl++</string>
+   </property>
+  </action>
+  <action name="menuCollapse">
+   <property name="text">
+    <string>收缩所有节点</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="jsoneditor.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>menuExit</sender>
+   <signal>triggered()</signal>
+   <receiver>JsonEditorMain</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>362</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuSelectAll</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonCode</receiver>
+   <slot>selectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuCut</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonCode</receiver>
+   <slot>cut()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuCopy</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonCode</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuPaste</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonCode</receiver>
+   <slot>paste()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuUndo</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonCode</receiver>
+   <slot>undo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuRedo</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonCode</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuNewFile</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonCode</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuExpand</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonTree</receiver>
+   <slot>expandAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>menuCollapse</sender>
+   <signal>triggered()</signal>
+   <receiver>jsonTree</receiver>
+   <slot>collapseAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,23 @@
+<RCC>
+  <qresource prefix="ToolbarIcon">
+    <file>images/list-add.png</file>
+    <file>images/list-addchild.png</file>
+    <file>images/list-remove.png</file>
+    <file>images/edit-paste.png</file>
+    <file>images/media-floppy.png</file>
+    <file>images/document-new.png</file>
+    <file>images/document-open.png</file>
+    <file>images/document-save.png</file>
+    <file>images/edit-clear.png</file>
+    <file>images/edit-copy.png</file>
+    <file>images/edit-cut.png</file>
+    <file>images/system-log-out.png</file>
+    <file>images/edit-find.png</file>
+    <file>images/edit-find-replace.png</file>
+    <file>images/edit-redo.png</file>
+    <file>images/edit-undo.png</file>
+    <file>images/folder-open.png</file>
+    <file>images/view-refresh.png</file>
+    <file>images/format-justify-right.png</file>
+  </qresource>
+</RCC>
