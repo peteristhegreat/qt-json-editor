@@ -8,18 +8,14 @@ Update for jsoneditor.googlecode.com for Qt 5.3
 Known Issues/Bugs
 ---------
 
- - Adding a node to an empty file crashes.
- - Find functions not implemented.
- - Save and open functions not implemented
+ - No about page.
+ - Help page could be better.
+ - No validation on int/double entry
 
 Upcoming Features
 ----------
 
- - Fix known issues
- - Javascript syntax highlighter on left
  - Font choices
- - Splitter for easier resizing
- - Remember size of window.
+ - Display filename in the title bar
  - Switch to using native QJson for parsing?
- - Add icons for Mac
- - Add releases for Mac and Windows
+ - Add release for Mac
