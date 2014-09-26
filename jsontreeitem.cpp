@@ -1,4 +1,4 @@
-#include <QStringList>
+﻿#include <QStringList>
 
 #include "jsontreeitem.h"
 

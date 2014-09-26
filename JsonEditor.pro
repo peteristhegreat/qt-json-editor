@@ -1,7 +1,10 @@
 # -------------------------------------------------
 # Project created by QtCreator 2010-05-21T22:37:21
 # -------------------------------------------------
-TARGET = JsonEditor
+TARGET = QtJsonEditor
+
+QT       += core gui multimedia multimediawidgets widgets
+
 TEMPLATE = app
 SOURCES += main.cpp \
     jsoneditormain.cpp \

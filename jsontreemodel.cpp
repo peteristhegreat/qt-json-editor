@@ -256,31 +256,31 @@ QString JsonTreeModel::getTypeString(int vType)
     switch (vType)
     {
     case Json::arrayValue:
-        typeString = tr("数组");
+        typeString = tr("array");
         break;
     case Json::booleanValue:
-        typeString = tr("布尔");
+        typeString = tr("boolean");
         break;
     case Json::intValue:
-        typeString = tr("整数");
+        typeString = tr("integer");
         break;
     case Json::nullValue:
-        typeString = tr("空值");
+        typeString = tr("null");
         break;
     case Json::objectValue:
-        typeString = tr("对象");
+        typeString = tr("object");
         break;
     case Json::realValue:
-        typeString = tr("浮点数");
+        typeString = tr("double");
         break;
     case Json::stringValue:
-        typeString = tr("字符串");
+        typeString = tr("string");
         break;
     case Json::uintValue:
-        typeString = tr("无符号整数");
+        typeString = tr("unsigned integer");
         break;
     defalut:
-        typeString = tr("类型错误");
+        typeString = tr("type error");
     }
     return typeString;
 }

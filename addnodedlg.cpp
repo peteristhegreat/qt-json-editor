@@ -11,13 +11,13 @@ AddNodeDlg::AddNodeDlg(QWidget *parent) :
     connect(ui->nodeType, SIGNAL(currentIndexChanged(QString)), this, SLOT(onCurrentIndexChanged(QString)));
 
     QStringList typeItems;
-    typeItems.append(QString(tr("数组")));
-    typeItems.append(QString(tr("对象")));
-    typeItems.append(QString(tr("布尔")));
-    typeItems.append(QString(tr("空值")));
-    typeItems.append(QString(tr("整数")));
-    typeItems.append(QString(tr("浮点数")));
-    typeItems.append(QString(tr("字符串")));
+    typeItems.append(QString(tr("array")));
+    typeItems.append(QString(tr("object")));
+    typeItems.append(QString(tr("boolean")));
+    typeItems.append(QString(tr("null")));
+    typeItems.append(QString(tr("int")));
+    typeItems.append(QString(tr("double")));
+    typeItems.append(QString(tr("string")));
     ui->nodeType->addItems(typeItems);
 }
 
@@ -62,9 +62,9 @@ void AddNodeDlg::okButton()
 
 void AddNodeDlg::onCurrentIndexChanged(QString currentText)
 {
-    if (currentText.compare(tr("数组")) == 0
-        || currentText.compare(tr("对象")) == 0
-        || currentText.compare(tr("空值")) == 0)
+    if (currentText == tr("array")
+        || currentText == tr("object")
+        || currentText == tr("null"))
     {
         ui->nodeValue->setEnabled(false);
     }
@@ -78,15 +78,15 @@ void AddNodeDlg::hideEvent(QHideEvent *e)
 {
     if (ui->nodeTitle->text().length() == 0)
     {
-        QMessageBox::information(this, tr("提示"), tr("必须填写节点名称"));
+        QMessageBox::information(this, tr("Tip"), tr("Node name must be filled"));
         return;
     }
 
-    if (ui->nodeType->currentText().compare(tr("布尔")) == 0)
+    if (ui->nodeType->currentText() == tr("boolean"))
         if (ui->nodeValue->text().toLower().compare(tr("true")) != 0
             && ui->nodeValue->text().toLower().compare(tr("false")) != 0)
         {
-            QMessageBox::information(this, tr("提示"), tr("布尔类型的值必须是 true 或 false"));
+            QMessageBox::information(this, tr("Tip"), tr("Boolean values must be true or false"));
             return;
         }
 

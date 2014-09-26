@@ -15,7 +15,16 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="margin">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
      <number>0</number>
     </property>
     <item>
@@ -49,12 +58,12 @@
      <x>0</x>
      <y>0</y>
      <width>726</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>文件</string>
+     <string>File</string>
     </property>
     <addaction name="menuNewFile"/>
     <addaction name="menuOpenFile"/>
@@ -67,7 +76,7 @@
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>编辑</string>
+     <string>Edit</string>
     </property>
     <addaction name="menuUndo"/>
     <addaction name="menuRedo"/>
@@ -80,13 +89,13 @@
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
-     <string>查看</string>
+     <string>Find</string>
     </property>
     <widget class="QMenu" name="menu_5">
      <property name="title">
-      <string>工具栏</string>
+      <string>Toolbars</string>
      </property>
-     <addaction name="menuFileTools"/>
+     <addaction name="actionTools"/>
      <addaction name="menuEditTools"/>
      <addaction name="menuFindTools"/>
      <addaction name="menuCodeTools"/>
@@ -102,14 +111,14 @@
    </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
-     <string>帮助</string>
+     <string>About</string>
     </property>
     <addaction name="menuAbout"/>
     <addaction name="menuHelp"/>
    </widget>
    <widget class="QMenu" name="menu_6">
     <property name="title">
-     <string>代码</string>
+     <string>Tools</string>
     </property>
     <addaction name="menuRefresh"/>
     <addaction name="menuFormat"/>
@@ -213,7 +222,10 @@
      <normaloff>:/ToolbarIcon/images/document-new.png</normaloff>:/ToolbarIcon/images/document-new.png</iconset>
    </property>
    <property name="text">
-    <string>新建</string>
+    <string>New</string>
+   </property>
+   <property name="toolTip">
+    <string>New</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -225,7 +237,10 @@
      <normaloff>:/ToolbarIcon/images/document-open.png</normaloff>:/ToolbarIcon/images/document-open.png</iconset>
    </property>
    <property name="text">
-    <string>打开</string>
+    <string>Open</string>
+   </property>
+   <property name="toolTip">
+    <string>Open</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -237,7 +252,10 @@
      <normaloff>:/ToolbarIcon/images/media-floppy.png</normaloff>:/ToolbarIcon/images/media-floppy.png</iconset>
    </property>
    <property name="text">
-    <string>保存</string>
+    <string>Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -245,7 +263,10 @@
   </action>
   <action name="menuSaveAs">
    <property name="text">
-    <string>另存为…</string>
+    <string>Save As...</string>
+   </property>
+   <property name="toolTip">
+    <string>Save As</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -256,7 +277,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>最近文件</string>
+    <string>Recent</string>
+   </property>
+   <property name="toolTip">
+    <string>Recent</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+1</string>
@@ -268,7 +292,10 @@
      <normaloff>:/ToolbarIcon/images/system-log-out.png</normaloff>:/ToolbarIcon/images/system-log-out.png</iconset>
    </property>
    <property name="text">
-    <string>退出</string>
+    <string>Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -280,7 +307,10 @@
      <normaloff>:/ToolbarIcon/images/edit-undo.png</normaloff>:/ToolbarIcon/images/edit-undo.png</iconset>
    </property>
    <property name="text">
-    <string>撤销</string>
+    <string>Undo</string>
+   </property>
+   <property name="toolTip">
+    <string>Undo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Z</string>
@@ -292,7 +322,10 @@
      <normaloff>:/ToolbarIcon/images/edit-cut.png</normaloff>:/ToolbarIcon/images/edit-cut.png</iconset>
    </property>
    <property name="text">
-    <string>剪切</string>
+    <string>Cut</string>
+   </property>
+   <property name="toolTip">
+    <string>Cut</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+X</string>
@@ -304,7 +337,10 @@
      <normaloff>:/ToolbarIcon/images/edit-copy.png</normaloff>:/ToolbarIcon/images/edit-copy.png</iconset>
    </property>
    <property name="text">
-    <string>复制</string>
+    <string>Copy</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
@@ -316,7 +352,10 @@
      <normaloff>:/ToolbarIcon/images/edit-paste.png</normaloff>:/ToolbarIcon/images/edit-paste.png</iconset>
    </property>
    <property name="text">
-    <string>粘贴</string>
+    <string>Paste</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
@@ -328,10 +367,10 @@
      <normaloff>:/ToolbarIcon/images/format-justify-right.png</normaloff>:/ToolbarIcon/images/format-justify-right.png</iconset>
    </property>
    <property name="text">
-    <string>生成代码</string>
+    <string>Format</string>
    </property>
    <property name="toolTip">
-    <string>生成代码</string>
+    <string>Format</string>
    </property>
    <property name="shortcut">
     <string>Shift+F</string>
@@ -343,10 +382,10 @@
      <normaloff>:/ToolbarIcon/images/view-refresh.png</normaloff>:/ToolbarIcon/images/view-refresh.png</iconset>
    </property>
    <property name="text">
-    <string>刷新代码树</string>
+    <string>Refresh</string>
    </property>
    <property name="toolTip">
-    <string>刷新代码树</string>
+    <string>Refresh</string>
    </property>
    <property name="shortcut">
     <string>Shift+R</string>
@@ -360,7 +399,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>状态栏</string>
+    <string>Statusbar</string>
+   </property>
+   <property name="toolTip">
+    <string>Statusbar</string>
    </property>
    <property name="shortcut">
     <string>Shift+S</string>
@@ -368,7 +410,10 @@
   </action>
   <action name="menuAbout">
    <property name="text">
-    <string>关于</string>
+    <string>About</string>
+   </property>
+   <property name="toolTip">
+    <string>About</string>
    </property>
    <property name="shortcut">
     <string>Shift+A</string>
@@ -376,7 +421,10 @@
   </action>
   <action name="menuHelp">
    <property name="text">
-    <string>帮助</string>
+    <string>Help</string>
+   </property>
+   <property name="toolTip">
+    <string>Help</string>
    </property>
    <property name="shortcut">
     <string>F1</string>
@@ -388,7 +436,10 @@
      <normaloff>:/ToolbarIcon/images/edit-redo.png</normaloff>:/ToolbarIcon/images/edit-redo.png</iconset>
    </property>
    <property name="text">
-    <string>重做</string>
+    <string>Redo</string>
+   </property>
+   <property name="toolTip">
+    <string>Redo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Y</string>
@@ -396,7 +447,7 @@
   </action>
   <action name="menuSelectAll">
    <property name="text">
-    <string>全选</string>
+    <string>Select All</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
@@ -408,7 +459,7 @@
      <normaloff>:/ToolbarIcon/images/edit-find.png</normaloff>:/ToolbarIcon/images/edit-find.png</iconset>
    </property>
    <property name="text">
-    <string>查找</string>
+    <string>Find</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
@@ -420,13 +471,13 @@
      <normaloff>:/ToolbarIcon/images/edit-find-replace.png</normaloff>:/ToolbarIcon/images/edit-find-replace.png</iconset>
    </property>
    <property name="text">
-    <string>替换</string>
+    <string>Replace</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
    </property>
   </action>
-  <action name="menuFileTools">
+  <action name="actionTools">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -434,7 +485,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>文件</string>
+    <string>Tools</string>
    </property>
   </action>
   <action name="menuEditTools">
@@ -445,7 +496,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>编辑</string>
+    <string>Edit</string>
    </property>
   </action>
   <action name="menuFindTools">
@@ -456,7 +507,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>查看</string>
+    <string>Find</string>
    </property>
   </action>
   <action name="menuCodeTools">
@@ -467,7 +518,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>代码</string>
+    <string>Code</string>
    </property>
   </action>
   <action name="menuInsertNode">
@@ -476,7 +527,7 @@
      <normaloff>:/ToolbarIcon/images/list-add.png</normaloff>:/ToolbarIcon/images/list-add.png</iconset>
    </property>
    <property name="text">
-    <string>插入节点</string>
+    <string>Insert Node</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
@@ -491,7 +542,7 @@
      <normaloff>:/ToolbarIcon/images/list-remove.png</normaloff>:/ToolbarIcon/images/list-remove.png</iconset>
    </property>
    <property name="text">
-    <string>删除节点</string>
+    <string>Delete Node</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+D</string>
@@ -506,10 +557,10 @@
      <normaloff>:/ToolbarIcon/images/list-addchild.png</normaloff>:/ToolbarIcon/images/list-addchild.png</iconset>
    </property>
    <property name="text">
-    <string>插入子项</string>
+    <string>Insert Child</string>
    </property>
    <property name="toolTip">
-    <string>插入子项</string>
+    <string>Insert Child</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+I</string>
@@ -517,7 +568,7 @@
   </action>
   <action name="menuExpand">
    <property name="text">
-    <string>展开所有节点</string>
+    <string>Expand</string>
    </property>
    <property name="shortcut">
     <string>Ctrl++</string>
@@ -525,7 +576,7 @@
   </action>
   <action name="menuCollapse">
    <property name="text">
-    <string>收缩所有节点</string>
+    <string>Collapse</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+-</string>

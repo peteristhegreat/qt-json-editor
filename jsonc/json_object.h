@@ -28,8 +28,12 @@ extern const char *json_number_chars;
 extern const char *json_hex_chars;
 
 /* forward structure definitions */
-
+#ifdef __MINGW32__
+#define boolean boolean_int
+typedef int boolean_int;
+#else
 typedef int boolean;
+#endif
 typedef struct printbuf printbuf;
 typedef struct lh_table lh_table;
 typedef struct array_list array_list;

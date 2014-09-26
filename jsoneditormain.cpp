@@ -3,15 +3,16 @@
 #include "jsontreemodel.h"
 #include "addnodedlg.h"
 
-#include <QtGui>
+#include <QMessageBox>
+//#include <QtGui>
 
 JsonEditorMain::JsonEditorMain(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::JsonEditorMain),
-    newInsertText(tr("插入新数据")),
-    treeViewColumnKey(tr("节点")),
-    treeViewColumnValue(tr("值")),
-    treeViewColumnType(tr("类型"))
+    newInsertText(tr("Insert new data")),
+    treeViewColumnKey(tr("Node")),
+    treeViewColumnValue(tr("Value")),
+    treeViewColumnType(tr("Type"))
 {
     ui->setupUi(this);
     connect(ui->menuCodeTools, SIGNAL(toggled(bool)), this, SLOT(toggleCodeToolbar(bool)));
@@ -234,7 +235,7 @@ QString JsonEditorMain::treeFormat(JsonTreeItem *treeItem, QString indent, bool 
         resultStr = indent + QString("\"") + objectKey + "\": ";
     }
 
-    if (objectType.compare(tr("对象"), Qt::CaseInsensitive) == 0
+    if (objectType.compare(tr("object"), Qt::CaseInsensitive) == 0
         || objectType.compare(treeViewColumnType, Qt::CaseInsensitive) == 0)
     {
         resultStr += "{\n";
@@ -247,7 +248,7 @@ QString JsonEditorMain::treeFormat(JsonTreeItem *treeItem, QString indent, bool 
         resultStr.remove(resultStr.length() - 2, 1);
         resultStr += indent + "},\n";
     }
-    else if (objectType.compare(tr("数组"), Qt::CaseInsensitive) == 0)
+    else if (objectType.compare(tr("array"), Qt::CaseInsensitive) == 0)
     {
         resultStr += "[\n";
         JsonTreeItem *subObjectItem;
@@ -261,7 +262,7 @@ QString JsonEditorMain::treeFormat(JsonTreeItem *treeItem, QString indent, bool 
     }
     else
     {
-        if (objectType.compare(tr("字符串"), Qt::CaseInsensitive) == 0 ||
+        if (objectType.compare(tr("string"), Qt::CaseInsensitive) == 0 ||
             objectType.compare(newInsertText, Qt::CaseInsensitive) == 0)
         {
             resultStr += "\"" + objectValue + "\",\n";
@@ -277,17 +278,18 @@ QString JsonEditorMain::treeFormat(JsonTreeItem *treeItem, QString indent, bool 
 
 void JsonEditorMain::showHelp()
 {
-    QMessageBox::information(this, tr("使用帮助"), tr("1. 在主界面的左边填写入 JSON 代码\n"
-                                                  "2. 点击菜单\"生成代码树\"，主界面右边会生成树\n"
-                                                  "3. 给树增减节点或修改值之后，点击菜单\"生成代码\"，会从树来生成 JSON 代码"));
+    QMessageBox::information(this, tr("Using Help"), tr(
+		"1 On the left side of the main interface to fill the JSON code \n"
+		"2 Click on the menu \" Generate code tree \", the right of the main interface will spanning tree \n"
+		"3 To insert or delete after the tree node or modify the value, click on the menu \" Generate Code \", will generate JSON code from the tree."												  ));
 }
 
 void JsonEditorMain::dataEdit(QModelIndex editIndex)
 {
     QString vType = editIndex.sibling(editIndex.row(), 2).data(Qt::EditRole).toString();
 
-    if (vType.compare(tr("对象")) != 0
-        && vType.compare(tr("数组")) != 0)
+    if (vType.compare(tr("object")) != 0
+        && vType.compare(tr("array")) != 0)
     {
         if (editIndex.column() >= 2)
         {
