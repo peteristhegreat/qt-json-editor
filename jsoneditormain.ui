@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>JsonEditorMain</string>
+   <string>Json Editor</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -28,11 +28,7 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QTextEdit" name="jsonCode">
-      <property name="locale">
-       <locale language="Chinese" country="China"/>
-      </property>
-     </widget>
+     <widget class="QTextEdit" name="jsonCode"/>
     </item>
     <item>
      <widget class="QTreeView" name="jsonTree">
@@ -91,16 +87,16 @@
     <property name="title">
      <string>Find</string>
     </property>
-    <widget class="QMenu" name="menu_5">
+    <widget class="QMenu" name="menu_6">
      <property name="title">
       <string>Toolbars</string>
      </property>
-     <addaction name="actionTools"/>
+     <addaction name="menuFileTools"/>
      <addaction name="menuEditTools"/>
      <addaction name="menuFindTools"/>
      <addaction name="menuCodeTools"/>
     </widget>
-    <addaction name="menu_5"/>
+    <addaction name="menu_6"/>
     <addaction name="menuStatubar"/>
     <addaction name="separator"/>
     <addaction name="menuFind"/>
@@ -116,7 +112,7 @@
     <addaction name="menuAbout"/>
     <addaction name="menuHelp"/>
    </widget>
-   <widget class="QMenu" name="menu_6">
+   <widget class="QMenu" name="menu_5">
     <property name="title">
      <string>Tools</string>
     </property>
@@ -129,7 +125,7 @@
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
-   <addaction name="menu_6"/>
+   <addaction name="menu_5"/>
    <addaction name="menu_3"/>
    <addaction name="menu_4"/>
   </widget>
@@ -477,7 +473,7 @@
     <string>Ctrl+H</string>
    </property>
   </action>
-  <action name="actionTools">
+  <action name="menuFileTools">
    <property name="checkable">
     <bool>true</bool>
    </property>

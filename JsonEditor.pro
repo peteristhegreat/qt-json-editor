@@ -5,6 +5,9 @@ TARGET = QtJsonEditor
 
 QT       += core gui multimedia multimediawidgets widgets
 
+ICON = icon.icns
+RC_FILE = myapp.rc
+
 TEMPLATE = app
 SOURCES += main.cpp \
     jsoneditormain.cpp \
@@ -34,7 +37,8 @@ HEADERS += jsoneditormain.h \
     jsonc/config.h \
     jsontreeitem.h \
     jsontreemodel.h \
-    addnodedlg.h
+    addnodedlg.h \
+    version.h
 FORMS += jsoneditormain.ui \
     addnodedlg.ui
 OTHER_FILES += images/view-refresh.png \
@@ -52,5 +56,7 @@ OTHER_FILES += images/view-refresh.png \
     images/edit-clear.png \
     images/document-save.png \
     images/document-open.png \
+    myapp.rc \
     images/document-new.png
 RESOURCES += jsoneditor.qrc
+
