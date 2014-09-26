@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QModelIndex>
+#include <QTextEdit>
 #include "jsonc/jsoncxx.h"
 #include "jsontreeitem.h"
 
@@ -18,6 +19,7 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::JsonEditorMain *ui;
@@ -29,6 +31,16 @@ private:
     const QString treeViewColumnType;
 
     QString treeFormat(JsonTreeItem* treeItem = NULL, QString indent = "", bool noHeader = false);
+    void readSettings();
+    void writeSettings();
+    bool maybeSave();
+    void loadFile(const QString &fileName);
+    bool saveFile(const QString &fileName);
+    void setCurrentFile(const QString &fileName);
+    QString strippedName(const QString &fullFileName);
+    QString curFile;
+    QTextEdit *textEdit;
+    QString lastFilePath;
 
 private slots:
     void toggleFileToolbar(bool checked);
@@ -44,6 +56,10 @@ private slots:
     void formatCode();
     void showHelp();
     void dataEdit(QModelIndex editIndex);
+    void open();
+    bool save();
+    bool saveAs();
+    void documentWasModified();
 };
 
 #endif // JSONEDITORMAIN_H

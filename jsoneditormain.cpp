@@ -2,8 +2,10 @@
 #include "ui_jsoneditormain.h"
 #include "jsontreemodel.h"
 #include "addnodedlg.h"
-
+#include "jsedit.h"
 #include <QMessageBox>
+#include <QInputDialog>
+#include <QFileDialog>
 //#include <QtGui>
 
 JsonEditorMain::JsonEditorMain(QWidget *parent) :
@@ -27,6 +29,23 @@ JsonEditorMain::JsonEditorMain(QWidget *parent) :
     connect(ui->menuFormat, SIGNAL(triggered()), this, SLOT(formatCode()));
     connect(ui->menuHelp, SIGNAL(triggered()), this, SLOT(showHelp()));
     connect(ui->jsonTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(dataEdit(QModelIndex)));
+
+
+//    connect(ui->menuNewFile, SIGNAL(triggered()), this, SLOT(newFile()));
+    connect(ui->menuOpenFile, SIGNAL(triggered()), this, SLOT(open()));
+    connect(ui->menuSaveFile, SIGNAL(triggered()), this, SLOT(save()));
+    connect(ui->menuSaveAs, SIGNAL(triggered()), this, SLOT(saveAs()));
+
+    JSHighlighter * highlight = new JSHighlighter(ui->jsonCode->document());
+
+    readSettings();
+
+    textEdit = ui->jsonCode;
+    connect(textEdit->document(), SIGNAL(contentsChanged()),
+            this, SLOT(documentWasModified()));
+
+    setCurrentFile("");
+    setUnifiedTitleAndToolBarOnMac(true);
 }
 
 JsonEditorMain::~JsonEditorMain()
@@ -106,6 +125,12 @@ void JsonEditorMain::insertTreeNode()
     AddNodeDlg dlg;
     if (dlg.exec() == QDialog::Accepted)
     {
+        if(ui->jsonTree->selectionModel() == 0)
+        {
+            QMessageBox::warning(this,this->windowTitle(),"Adding a node to an empty tree is not supported.");
+            return;
+        }
+
         QModelIndex index = ui->jsonTree->selectionModel()->currentIndex();
         QAbstractItemModel *model = ui->jsonTree->model();
 
@@ -245,7 +270,8 @@ QString JsonEditorMain::treeFormat(JsonTreeItem *treeItem, QString indent, bool 
             subObjectItem = treeItem->child(i);
             resultStr += treeFormat(subObjectItem, indent + "    ");
         }
-        resultStr.remove(resultStr.length() - 2, 1);
+        if(treeItem->childCount() > 0)
+            resultStr.remove(resultStr.length() - 2, 1);// remove trailing comma
         resultStr += indent + "},\n";
     }
     else if (objectType.compare(tr("array"), Qt::CaseInsensitive) == 0)
@@ -257,7 +283,8 @@ QString JsonEditorMain::treeFormat(JsonTreeItem *treeItem, QString indent, bool 
             subObjectItem = treeItem->child(i);
             resultStr += treeFormat(subObjectItem, indent + "    ", true);
         }
-        resultStr.remove(resultStr.length() - 2, 1);
+        if(treeItem->childCount() > 0)
+            resultStr.remove(resultStr.length() - 2, 1);// remove trailing comma
         resultStr += indent + "],\n";
     }
     else
@@ -304,8 +331,161 @@ void JsonEditorMain::dataEdit(QModelIndex editIndex)
     }
 }
 
+void JsonEditorMain::documentWasModified()
+{
+    setWindowModified(textEdit->document()->isModified());
+}
 
+void JsonEditorMain::closeEvent(QCloseEvent *event)
+{
+    if (maybeSave()) {
+        writeSettings();
+        event->accept();
+    } else {
+        event->ignore();
+    }
+}
 
+void JsonEditorMain::open()
+{
+    if (maybeSave()) {
+        QString fileName = QFileDialog::getOpenFileName(this,"Open Json File",lastFilePath);
+        if (!fileName.isEmpty())
+        {
+            QFileInfo info(fileName);
+            lastFilePath = info.absoluteDir().absolutePath();
+            loadFile(fileName);
+        }
+    }
 
+    ui->menuRefresh->trigger();
+}
 
+bool JsonEditorMain::save()
+{
+    if (curFile.isEmpty()) {
+        return saveAs();
+    } else {
+        return saveFile(curFile);
+    }
+}
 
+bool JsonEditorMain::saveAs()
+{
+    QFileDialog dialog(this);
+    dialog.setWindowModality(Qt::WindowModal);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.exec();
+    QStringList files = dialog.selectedFiles();
+
+    if (files.isEmpty())
+        return false;
+
+    return saveFile(files.at(0));
+}
+
+void JsonEditorMain::readSettings()
+{
+    QSettings settings;
+//    QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
+//    QSize size = settings.value("size", QSize(400, 400)).toSize();
+//    resize(size);
+//    move(pos);
+    this->restoreGeometry(settings.value("geometry").toByteArray());
+    lastFilePath = (settings.value("file_path").toString());
+}
+
+void JsonEditorMain::writeSettings()
+{
+    QSettings settings;
+//    settings.setValue("pos", pos());
+//    settings.setValue("size", size());
+    settings.setValue("geometry", this->saveGeometry());
+    settings.setValue("file_path", lastFilePath);
+}
+
+bool JsonEditorMain::maybeSave()
+{
+    if (ui->jsonCode->document()->isModified()) {
+        QMessageBox::StandardButton ret;
+        ret = QMessageBox::warning(this, this->windowTitle(),
+                     tr("The document has been modified.\n"
+                        "Do you want to save your changes?"),
+                     QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        if (ret == QMessageBox::Save)
+            return save();
+        else if (ret == QMessageBox::Cancel)
+            return false;
+    }
+    return true;
+}
+
+void JsonEditorMain::loadFile(const QString &fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, this->windowTitle(),
+                             tr("Cannot read file %1:\n%2.")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return;
+    }
+
+    QTextStream in(&file);
+#ifndef QT_NO_CURSOR
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
+    textEdit->setPlainText(in.readAll());
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+
+    setCurrentFile(fileName);
+    statusBar()->showMessage(tr("File loaded"), 2000);
+}
+
+bool JsonEditorMain::saveFile(const QString &fileName)
+{
+    ui->menuFormat->trigger();
+
+    QFile file(fileName);
+    QFileInfo info(fileName);
+    lastFilePath = info.absoluteDir().absolutePath();
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, this->windowTitle(),
+                             tr("Cannot write file %1:\n%2.")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return false;
+    }
+
+    QTextStream out(&file);
+#ifndef QT_NO_CURSOR
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
+    out << textEdit->toPlainText();
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+
+    setCurrentFile(fileName);
+    statusBar()->showMessage(tr("File saved"), 2000);
+    return true;
+}
+
+void JsonEditorMain::setCurrentFile(const QString &fileName)
+{
+    curFile = fileName;
+    ui->jsonCode->document()->setModified(false);
+    setWindowModified(false);
+
+    QString shownName = curFile;
+    if (curFile.isEmpty())
+        shownName = "untitled.json";
+    setWindowFilePath(shownName);
+}
+
+QString JsonEditorMain::strippedName(const QString &fullFileName)
+{
+    return QFileInfo(fullFileName).fileName();
+}

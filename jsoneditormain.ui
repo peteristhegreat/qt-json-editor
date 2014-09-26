@@ -6,44 +6,35 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>726</width>
-    <height>544</height>
+    <width>696</width>
+    <height>489</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Json Editor</string>
+   <string>Json Editor[*]</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-    <item>
-     <widget class="QTextEdit" name="jsonCode"/>
-    </item>
-    <item>
-     <widget class="QTreeView" name="jsonTree">
-      <property name="alternatingRowColors">
-       <bool>true</bool>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
-      </property>
-      <property name="autoExpandDelay">
-       <number>1</number>
-      </property>
-      <property name="animated">
-       <bool>true</bool>
-      </property>
+      <widget class="QTextEdit" name="jsonCode"/>
+      <widget class="QTreeView" name="jsonTree">
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="autoExpandDelay">
+        <number>1</number>
+       </property>
+       <property name="animated">
+        <bool>true</bool>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -53,7 +44,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>726</width>
+     <width>696</width>
      <height>21</height>
     </rect>
    </property>

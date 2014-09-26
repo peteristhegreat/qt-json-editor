@@ -1,7 +1,7 @@
 # -------------------------------------------------
 # Project created by QtCreator 2010-05-21T22:37:21
 # -------------------------------------------------
-TARGET = QtJsonEditor
+TARGET = JsonEditor
 
 QT       += core gui multimedia multimediawidgets widgets
 
@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     jsonc/arraylist.c \
     jsontreeitem.cpp \
     jsontreemodel.cpp \
-    addnodedlg.cpp
+    addnodedlg.cpp \
+    jsedit.cpp
 HEADERS += jsoneditormain.h \
     jsonc/printbuf.h \
     jsonc/linkhash.h \
@@ -38,7 +39,9 @@ HEADERS += jsoneditormain.h \
     jsontreeitem.h \
     jsontreemodel.h \
     addnodedlg.h \
-    version.h
+    version.h \
+    jsedit.h \
+    JSHighlighter.h
 FORMS += jsoneditormain.ui \
     addnodedlg.ui
 OTHER_FILES += images/view-refresh.png \

@@ -23,7 +23,7 @@
 #define VER_FILEDESCRIPTION_STR     "Json Editor made in Qt"
 // This needs to stay "Captain Crunch" or it will change the location of the INI File
 #define VER_INTERNALNAME_STR        "Json Editor"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright (c) 2014"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
 #define VER_ORIGINALFILENAME_STR    "JsonEditor.exe"
