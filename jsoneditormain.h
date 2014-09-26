@@ -6,6 +6,8 @@
 #include <QTextEdit>
 #include "jsonc/jsoncxx.h"
 #include "jsontreeitem.h"
+#include "finddialog.h"
+#include "findreplacedialog.h"
 
 namespace Ui {
     class JsonEditorMain;
@@ -41,6 +43,10 @@ private:
     QString curFile;
     QTextEdit *textEdit;
     QString lastFilePath;
+
+
+    FindDialog *m_findDialog;
+    FindReplaceDialog *m_findReplaceDialog;
 
 private slots:
     void toggleFileToolbar(bool checked);

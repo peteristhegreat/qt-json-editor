@@ -1,2 +1,4 @@
 ui_*.h
 Makefile*
+!*.dll
+!*.a

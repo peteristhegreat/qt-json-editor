@@ -63,3 +63,17 @@ OTHER_FILES += images/view-refresh.png \
     images/document-new.png
 RESOURCES += jsoneditor.qrc
 
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/ -lqtfindreplacedialog
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/ -lqtfindreplacedialogd
+else:unix: LIBS += -L$$PWD/libs/ -lqtfindreplacedialog
+
+INCLUDEPATH += $$PWD/dialogs
+DEPENDPATH += $$PWD/dialogs
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/libqtfindreplacedialog.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/libqtfindreplacedialogd.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/libs/qtfindreplacedialog.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/libs/qtfindreplacedialogd.lib
+else:unix: PRE_TARGETDEPS += $$PWD/libs/libqtfindreplacedialog.a

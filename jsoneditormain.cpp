@@ -38,14 +38,28 @@ JsonEditorMain::JsonEditorMain(QWidget *parent) :
 
     JSHighlighter * highlight = new JSHighlighter(ui->jsonCode->document());
 
-    readSettings();
+    setCurrentFile("");
 
     textEdit = ui->jsonCode;
     connect(textEdit->document(), SIGNAL(contentsChanged()),
             this, SLOT(documentWasModified()));
-
-    setCurrentFile("");
     setUnifiedTitleAndToolBarOnMac(true);
+
+    m_findDialog = new FindDialog(this);
+    m_findDialog->setModal(false);
+    m_findDialog->setTextEdit(textEdit);
+
+    m_findReplaceDialog = new FindReplaceDialog(this);
+    m_findReplaceDialog->setModal(false);
+    m_findReplaceDialog->setTextEdit(textEdit);
+
+    connect(ui->menuFind, SIGNAL(triggered()), m_findDialog, SLOT(show()));
+    connect(ui->menuReplace, SIGNAL(triggered()), m_findReplaceDialog, SLOT(show()));
+
+//    connect(ui->actionFindNext, SIGNAL(triggered()), m_findDialog, SLOT(findNext()));
+//    connect(ui->actionFindPrevious, SIGNAL(triggered()), m_findDialog, SLOT(findPrev()));
+
+    readSettings();
 }
 
 JsonEditorMain::~JsonEditorMain()
@@ -393,6 +407,12 @@ void JsonEditorMain::readSettings()
 //    move(pos);
     this->restoreGeometry(settings.value("geometry").toByteArray());
     lastFilePath = (settings.value("file_path").toString());
+    curFile = settings.value("last_opened_file").toString();
+    if(this->curFile.length() != 0)
+    {
+        loadFile(curFile);
+        ui->menuRefresh->trigger();
+    }
 }
 
 void JsonEditorMain::writeSettings()
@@ -402,6 +422,7 @@ void JsonEditorMain::writeSettings()
 //    settings.setValue("size", size());
     settings.setValue("geometry", this->saveGeometry());
     settings.setValue("file_path", lastFilePath);
+    settings.setValue("last_opened_file", this->curFile);
 }
 
 bool JsonEditorMain::maybeSave()
